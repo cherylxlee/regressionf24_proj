@@ -35,6 +35,41 @@ The application uses the popular [Kaggle Housing Prices dataset](https://www.kag
 - Quality metrics
 - Various amenities and features
 
+## Key Findings
+
+The analysis in this application reveals several important insights about regularization techniques and housing price prediction:
+
+### Multicollinearity and Model Selection
+
+- The housing dataset exhibits moderate to severe multicollinearity among several features, with VIF scores exceeding 10 for categorical variables like Exterior Quality and Neighborhood.
+- Despite the presence of multicollinearity (which typically favors Ridge regression), Lasso performed surprisingly well, suggesting that feature selection was beneficial for this dataset.
+
+### Feature Importance
+
+- Both Ridge and Lasso identified overall quality, living area, and garage characteristics as the most important predictors of house prices.
+- Lasso's ability to zero out less important coefficients provides a cleaner, more interpretable model by focusing on the most influential features.
+
+### Model Performance
+
+- Both regularization techniques outperformed standard linear regression, particularly for mid-range house prices.
+- All models showed increasing prediction errors for higher-priced homes, suggesting that luxury properties have unique characteristics not fully captured by the features.
+- The "funnel effect" observed in residual plots indicates heteroscedasticity, with larger variance in predictions for more expensive homes.
+
+### Optimal Regularization
+
+- Cross-validation revealed that regularization parameters (λ/alpha) between 1 and 100 worked well for both Ridge and Lasso models.
+- Lasso maintained better performance at higher regularization strengths compared to Ridge.
+- Excessive regularization (very high λ values) caused dramatic performance drops in both models.
+
+### Practical Guidelines
+
+- For simpler, more interpretable models: Choose Lasso with higher regularization parameters
+- When all features need to be retained: Ridge regression is preferred
+- For datasets with many irrelevant features: Lasso performs better
+- For datasets with high multicollinearity among important features: Ridge is generally more appropriate
+
+These findings demonstrate the importance of selecting appropriate regularization techniques based on dataset characteristics and modeling objectives.
+
 ## Installation
 
 ```bash
@@ -84,38 +119,3 @@ The application references several learning resources:
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Key Findings
-
-The analysis in this application reveals several important insights about regularization techniques and housing price prediction:
-
-### Multicollinearity and Model Selection
-
-- The housing dataset exhibits moderate to severe multicollinearity among several features, with VIF scores exceeding 10 for categorical variables like Exterior Quality and Neighborhood.
-- Despite the presence of multicollinearity (which typically favors Ridge regression), Lasso performed surprisingly well, suggesting that feature selection was beneficial for this dataset.
-
-### Feature Importance
-
-- Both Ridge and Lasso identified overall quality, living area, and garage characteristics as the most important predictors of house prices.
-- Lasso's ability to zero out less important coefficients provides a cleaner, more interpretable model by focusing on the most influential features.
-
-### Model Performance
-
-- Both regularization techniques outperformed standard linear regression, particularly for mid-range house prices.
-- All models showed increasing prediction errors for higher-priced homes, suggesting that luxury properties have unique characteristics not fully captured by the features.
-- The "funnel effect" observed in residual plots indicates heteroscedasticity, with larger variance in predictions for more expensive homes.
-
-### Optimal Regularization
-
-- Cross-validation revealed that regularization parameters (λ/alpha) between 1 and 100 worked well for both Ridge and Lasso models.
-- Lasso maintained better performance at higher regularization strengths compared to Ridge.
-- Excessive regularization (very high λ values) caused dramatic performance drops in both models.
-
-### Practical Guidelines
-
-- For simpler, more interpretable models: Choose Lasso with higher regularization parameters
-- When all features need to be retained: Ridge regression is preferred
-- For datasets with many irrelevant features: Lasso performs better
-- For datasets with high multicollinearity among important features: Ridge is generally more appropriate
-
-These findings demonstrate the importance of selecting appropriate regularization techniques based on dataset characteristics and modeling objectives.
